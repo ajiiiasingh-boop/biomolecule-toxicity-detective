@@ -1,0 +1,19 @@
+# Netlify — static deploy of the built client.
+#
+# The app detects that no API is reachable and runs on its bundled data layer,
+# so every case, chart, quiz and score still works. Nothing to configure in the
+# Netlify UI: point it at this repository and it reads this file.
+
+[build]
+  command = "npm install && npm run build"
+  publish = "client/dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# The app uses hash routing, so deep links never hit the server as real paths.
+# This rule is belt and braces for anyone who types a path directly.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -1,0 +1,31 @@
+{
+  "name": "biomolecule-toxicity-detective",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An interactive educational investigation game about how toxic stress affects biomolecules. React frontend, Express REST API, shared data layer.",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "node --watch server/index.js",
+    "dev:web": "npm run dev --workspace client",
+    "build": "npm run build --workspace client",
+    "start": "node server/index.js",
+    "preview": "npm run build && node server/index.js",
+    "test": "node --test server/test/*.test.js",
+    "standalone": "npm run build:standalone --workspace client"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

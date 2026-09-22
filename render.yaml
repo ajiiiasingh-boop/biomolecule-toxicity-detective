@@ -1,0 +1,22 @@
+# Render — the FULL application: Express API and the built client from one
+# Node process, on one public URL. This is the deploy to use if you want the
+# live REST API in your demo rather than the offline fallback.
+#
+# Render injects PORT; server/index.js already reads process.env.PORT.
+#
+# Note on the free plan: the service sleeps after about 15 minutes of no
+# traffic and takes roughly 30 seconds to wake. Open the URL a minute before
+# you present.
+
+services:
+  - type: web
+    name: biomolecule-toxicity-detective
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
