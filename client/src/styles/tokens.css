@@ -1,0 +1,118 @@
+/*
+ * tokens.css — the design system.
+ *
+ * The interface commits to a single dark world on purpose: it is a laboratory
+ * analyser at night, and a light variant would fight the whole premise. Every
+ * colour is therefore painted explicitly here rather than inherited, so the
+ * page holds its appearance on any host background.
+ *
+ * Colour strategy: the chrome is almost achromatic — cool steel greys with a
+ * slight blue bias — and the only saturated colour on screen belongs to the
+ * four biomolecule channels, named after fluorescence-microscopy channels.
+ * That means colour always MEANS something here. The four channel values were
+ * checked with a colour-vision-deficiency validator against the panel surface
+ * (#101728): all four clear the lightness band, the chroma floor, the
+ * normal-vision separation floor and 3:1 contrast. The tightest CVD pair sits
+ * in the warn band, which is permitted only alongside secondary encoding — so
+ * every channel colour in this app is always accompanied by an icon and a
+ * written label, and never carries identity on its own.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* ---- surfaces ---------------------------------------------------- */
+  --void: #05070e;
+  --deep: #080b16;
+  --panel: #0d1322;
+  --panel-2: #101728;
+  --panel-3: #151e33;
+  --glass: rgba(18, 27, 48, 0.58);
+  --glass-strong: rgba(24, 35, 60, 0.82);
+  --edge: rgba(137, 173, 232, 0.15);
+  --edge-strong: rgba(137, 173, 232, 0.32);
+  --grid-line: rgba(120, 160, 225, 0.055);
+
+  /* ---- ink --------------------------------------------------------- */
+  --ink: #e9f0fb;
+  --ink-2: #a4b5d0;
+  --ink-3: #6f819f;
+  --ink-4: #4b5a74;
+
+  /* ---- the key (primary action) ------------------------------------ */
+  --key: #e9f1ff;
+  --key-hover: #ffffff;
+  --key-ink: #06101f;
+
+  /* ---- biomolecule channels (validated set) ------------------------ */
+  --ch-dna: #3987e5;
+  --ch-protein: #2a9d8f;
+  --ch-lipid: #e0575f;
+  --ch-carb: #b8860b;
+
+  /* Tints used for washes and rings, never for text. */
+  --ch-dna-wash: rgba(57, 135, 229, 0.14);
+  --ch-protein-wash: rgba(42, 157, 143, 0.14);
+  --ch-lipid-wash: rgba(224, 87, 95, 0.14);
+  --ch-carb-wash: rgba(184, 134, 11, 0.16);
+
+  /* ---- status (reserved — never reused as a series colour) --------- */
+  --ok: #0ca30c;
+  --ok-wash: rgba(12, 163, 12, 0.14);
+  --warn: #fab219;
+  --warn-wash: rgba(250, 178, 25, 0.13);
+  --alert: #ec835a;
+
+  /* ---- type -------------------------------------------------------- */
+  --font-display: 'Saira Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --t-hero: clamp(2.2rem, 7.2vw, 4.7rem);
+  --t-h1: clamp(1.9rem, 5vw, 3rem);
+  --t-h2: clamp(1.4rem, 3.2vw, 1.95rem);
+  --t-h3: 1.14rem;
+  --t-body: 1rem;
+  --t-small: 0.875rem;
+  --t-micro: 0.75rem;
+
+  /* ---- space & shape ----------------------------------------------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 72px;
+
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 14px;
+  --r-pill: 999px;
+
+  --shadow-panel: 0 18px 44px -28px rgba(0, 0, 0, 0.9);
+  --shadow-lift: 0 22px 50px -24px rgba(0, 0, 0, 0.95);
+
+  --wrap: 1280px;
+  --read: 68ch;
+}
+
+/* Channel helper classes. Any element carrying data-channel gets the right
+   accent through one variable, so components never branch on the id. */
+[data-channel='dna-rna'] {
+  --channel: var(--ch-dna);
+  --channel-wash: var(--ch-dna-wash);
+}
+[data-channel='protein'] {
+  --channel: var(--ch-protein);
+  --channel-wash: var(--ch-protein-wash);
+}
+[data-channel='lipid'] {
+  --channel: var(--ch-lipid);
+  --channel-wash: var(--ch-lipid-wash);
+}
+[data-channel='carbohydrate'] {
+  --channel: var(--ch-carb);
+  --channel-wash: var(--ch-carb-wash);
+}
